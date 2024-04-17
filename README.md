@@ -1,3 +1,7 @@
+# This fork more closely follows the actual Bol.com API specs then the forked repo, which is based on incorrect specs only.
+
+---
+
 # Bol.com Retailer API client for PHP
 This is an open source PHP client for the [Bol.com Retailer API](https://api.bol.com/retailer/public/Retailer-API/v10/releasenotes.html) version 10.6.
 

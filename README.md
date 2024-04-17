@@ -1,4 +1,4 @@
-# This fork more closely follows the actual Bol.com API specs then the forked repo, which is based on incorrect specs only.
+# This fork more closely follows the actual Bol.com API then the forked repo
 
 ---
 

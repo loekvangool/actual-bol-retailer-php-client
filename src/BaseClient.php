@@ -47,10 +47,12 @@ class BaseClient
     /** @var ?callable */
     private $accessTokenExpiredCallback = null;
 
+    protected $http_debug = false;
+
     /**
      * BaseClient constructor.
      */
-    public function __construct()
+    public function __construct(array $http_options = [])
     {
         $handlerStack = HandlerStack::create();
 
@@ -59,9 +61,9 @@ class BaseClient
             $this->retryDelay()
         ));
 
-        $this->setHttp(new HttpClient([
+        $this->setHttp(new HttpClient(array_merge([
             'handler' => $handlerStack,
-        ]));
+        ], $http_options));
     }
 
     /**

@@ -63,7 +63,7 @@ class BaseClient
 
         $this->setHttp(new HttpClient(array_merge([
             'handler' => $handlerStack,
-        ], $http_options));
+        ], $http_options)));
     }
 
     /**

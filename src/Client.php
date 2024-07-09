@@ -105,6 +105,7 @@ class Client extends BaseClient
         $url = "retailer/content/catalog-products/{$ean}";
         $options = [
             'produces' => 'application/vnd.retailer.v10+json',
+            'language' => $AcceptLanguage,
         ];
         $responseTypes = [
             '200' => Model\CatalogProduct::class,
@@ -280,6 +281,7 @@ class Client extends BaseClient
                 'page' => $page,
             ],
             'produces' => 'application/vnd.retailer.v10+json',
+            'language' => $AcceptLanguage,
         ];
         $responseTypes = [
             '200' => Model\ProductRanks::class,
@@ -729,8 +731,10 @@ class Client extends BaseClient
      * @param int|null $page The requested page number with a page size of 50 items.
      * @param Enum\GetOrdersFulfilmentMethod|null $fulfilmentMethod Fulfilled by the retailer (FBR) or fulfilled by
      * bol.com (FBB). In order to retrieve both FBR and FBB orders, ALL can be used as a parameter.
-     * @param Enum\GetOrdersStatus|null $status To filter on order status. You can filter on either all orders
-     * independent from their status, open orders (excluding shipped and cancelled orders), and shipped orders.
+     * @param Enum\GetOrdersStatus|null $status You can filter orders based on their status with the following options:
+     * all orders, which include every order regardless of its current status; open orders, which show only the active
+     * orders excluding those that have been shipped or cancelled; and shipped orders, which display only the orders
+     * that have been shipped.
      * @param int|null $changeIntervalMinute To filter on the period in minutes during which the latest change was
      * performed on an order item.
      * @param string|null $latestChangeDate To filter on the date on which the latest change was performed on an order
@@ -831,6 +835,7 @@ class Client extends BaseClient
             'body' => $productListRequest,
             'produces' => 'application/vnd.retailer.v10+json',
             'consumes' => 'application/json',
+            'language' => $AcceptLanguage,
         ];
         $responseTypes = [
             '200' => Model\ProductListResponse::class,
@@ -864,6 +869,7 @@ class Client extends BaseClient
                 'category-id' => $categoryId,
             ],
             'produces' => 'application/vnd.retailer.v10+json',
+            'language' => $AcceptLanguage,
         ];
         $responseTypes = [
             '200' => Model\ProductListFiltersResponse::class,
@@ -958,6 +964,7 @@ class Client extends BaseClient
                 'country-code' => $countryCode?->value,
             ],
             'produces' => 'application/vnd.retailer.v10+json',
+            'language' => $AcceptLanguage,
         ];
         $responseTypes = [
             '200' => Model\ProductPlacementResponse::class,

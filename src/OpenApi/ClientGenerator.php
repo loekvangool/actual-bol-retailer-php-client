@@ -133,21 +133,21 @@ class ClientGenerator
         $this->addBodyParam($arguments, $code);
         $this->addFormData($arguments, $code);
 
-        $responseContent = $methodDefinition['responses']['200']['content'] ?? $methodDefinition['responses']['202']['content'] ?? $methodDefinition['responses']['400']['content'] ?? null;
+        $responseContent = $methodDefinition['responses']['200']['content'] ?? $methodDefinition['responses']['202']['content'] ?? $methodDefinition['responses']['207']['content'] ?? $methodDefinition['responses']['400']['content'] ?? null;
         $code[] = sprintf('            \'produces\' => \'%s\',', array_key_first($responseContent));
 
         if ($methodDefinition['requestBody']['content'] ?? false) {
             $code[] = sprintf('            \'consumes\' => \'%s\',', array_key_first($methodDefinition['requestBody']['content']));
         }
 
-        $code[] = '        ];';
-        $options = '$options';
-
         $acceptLanguage = $this->findMethodDefinitionParameter($methodDefinition, 'Accept-Language');
 
         if ($acceptLanguage !== null) {
             $code[] = sprintf('            \'language\' => %s,', '$AcceptLanguage');
         }
+
+        $code[] = '        ];';
+        $options = '$options';
 
         $this->addResponseTypes($methodDefinition['responses'], $code);
 
@@ -507,7 +507,7 @@ class ClientGenerator
         $code[] = '        $responseTypes = [';
         foreach ($responses as $httpStatus => $response) {
             $type = null;
-            if (in_array($httpStatus, ['200', '202'])) {
+            if (in_array($httpStatus, ['200', '202', '207'])) {
                 $response = current($response['content'] ?? []);
 
                 if (! isset($response['schema'])) {
